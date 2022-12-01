@@ -56,6 +56,8 @@ mod tests {
         let pad_to_16 = pkcs7_padder(hello_world, 16);
         let expected_pad_16 = b"\x48\x65\x6C\x6C\x6F\x2C\x20\x57\x6F\x72\x6C\x64\x21\x03\x03\x03";
         assert_eq!(pad_to_16, expected_pad_16);
-        assert!(pkcs7_validate_padding(expected_pad_16, 16))
+        assert!(pkcs7_validate_padding(expected_pad_16, 16));
+        assert!(!pkcs7_validate_padding(hello_world, 16));
+        assert!(!pkcs7_validate_padding(hello_world, 13));
     }
 }
